@@ -49,7 +49,7 @@ const Featured = () => {
                 <p className="text-base font-[#737373] font-normal leading-snug w-1/2 mx-auto">the majority have suffered alteration in some form, by injected humour, or randomized words which don't look even slightly believable.
                 </p>
             </div>
-            <div className='flex my-10 justify-center gap-5'>
+            <div className='sm:flex grid grid-cols-3 my-10 justify-center gap-5'>
                 {
                     FeaturedData.map(item => <div key={item.id} className="flex p-4 space-x-4 rounded-lg md:space-x-6">
                         <div className="flex flex-col justify-center items-center gap-5 border-2 p-5 rounded-md hover:bg-primary cursor-pointer transition-all duration-500 hover:text-white hover:border-primary">
