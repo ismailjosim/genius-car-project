@@ -24,6 +24,9 @@ const Services = () => {
                     services.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
                 }
             </div>
+            <div className='mt-10 flex justify-center'>
+                <button className="btn btn-md btn-outline border-primary text-primary rounded-sm font-bold hover:btn-primary">More Services</button>
+            </div>
         </div>
     );
 };
