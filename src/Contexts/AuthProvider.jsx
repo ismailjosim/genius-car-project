@@ -1,30 +1,49 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../configs/firebase.config';
 
-
-
-
-const AuthContext = createContext();
+export const AuthContext = createContext();
 const auth = getAuth(app);
 
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
 
-    // User Login function
+    // User SignUP function
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
+    // Login user function
+    const userLogin = (email, password) => {
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+    // signOut user functionality
+    const userLogout = () => {
+        return signOut(auth);
+    }
 
+    // Update User Profile functionality
+    const updateUserProfile = profile => {
+        return updateProfile(auth.currentUser, profile);
+    }
 
-    // Manage User change
+    // sign in with google Provider
+    const googleProviderLogin = provider => {
+        return signInWithPopup(auth, provider)
+    }
+    // sign in with gitHub Provider
+    const gitHubProviderLogin = provider => {
+        return signInWithPopup(auth, provider)
+    }
+
+    // Monitor User change
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log(currentUser);
-            setUser(currentUser)
+            setUser(currentUser);
+            setLoading(false);
         })
 
         return () => {
@@ -36,14 +55,16 @@ const AuthProvider = ({ children }) => {
     const authInfo = {
         user,
         loading,
-        createUser
+        createUser,
+        userLogin,
+        userLogout,
+        updateUserProfile,
+        gitHubProviderLogin,
+        googleProviderLogin
     }
     return (
         <AuthContext.Provider value={authInfo}>
-            {
-                children
-            }
-
+            {children}
         </AuthContext.Provider>
     );
 };

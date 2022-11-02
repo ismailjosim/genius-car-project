@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import loginImg from '../../assets/images/login/login.svg'
+import { AuthContext } from '../../Contexts/AuthProvider';
+
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
 
     const handleUserSignUP = event => {
         event.preventDefault();
@@ -11,8 +15,17 @@ const Register = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                toast.success("Congratulations! User Created Successfully 🎉🎉", { autoClose: 1000 });
+                console.log(user);
 
-
+            })
+            .catch(error => {
+                toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
+                console.log(error);
+            })
 
     }
 
@@ -28,20 +41,20 @@ const Register = () => {
                     <form onSubmit={handleUserSignUP} className="space-y-6 ng-untouched ng-pristine ng-valid">
                         <div className="space-y-1 text-sm">
                             <label htmlFor="name" className="block text-base font-bold">Full Name</label>
-                            <input type="text" name="name" placeholder="Your Full Name" className="w-full px-4 py-3 rounded-md focus:outline-primary border" />
+                            <input type="text" name="name" placeholder="Your Full Name" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
                         </div>
                         <div className="space-y-1 text-sm">
                             <label htmlFor="name" className="block text-base font-bold">Upload Image</label>
-                            <input type="text" name="photoURL" placeholder="Upload Your Image" className="w-full px-4 py-3 rounded-md focus:outline-primary border" />
+                            <input type="text" name="photoURL" placeholder="Upload Your Image" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
                         </div>
                         <div className="space-y-1 text-sm">
                             <label htmlFor="email" className="block text-base font-bold">Email</label>
-                            <input type="email" name="email" placeholder="Your email" className="w-full px-4 py-3 rounded-md focus:outline-primary border" />
+                            <input type="email" name="email" placeholder="Your email" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
                         </div>
                         <div className="space-y-1 text-sm">
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="password" className="block text-base font-bold">Confirm Password</label>
-                                <input type="password" name="password" placeholder="Enter password" className="w-full px-4 py-3 rounded-md focus:outline-primary border" />
+                                <input type="password" name="password" placeholder="Enter password" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
                             </div>
 
                         </div>
