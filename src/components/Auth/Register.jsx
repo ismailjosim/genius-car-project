@@ -6,7 +6,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const handleUserSignUP = event => {
         event.preventDefault();
@@ -15,19 +15,35 @@ const Register = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
+        form.reset();
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 toast.success("Congratulations! User Created Successfully 🎉🎉", { autoClose: 1000 });
                 console.log(user);
+                handleProfileUpdate(name, photoURL);
 
             })
             .catch(error => {
                 toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
-                console.log(error);
+                console.log(error.message);
             })
 
     }
+    // Update user Profile and name
+    const handleProfileUpdate = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(error => {
+                toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
+                console.log(error);
+            })
+    }
+
 
 
     return (
