@@ -3,6 +3,20 @@ import { Link } from 'react-router-dom';
 import loginImg from '../../assets/images/login/login.svg'
 
 const Register = () => {
+
+    const handleUserSignUP = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const photoURL = form.photoURL.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+
+
+    }
+
+
     return (
         <div>
             <div className='flex justify-around my-20'>
@@ -11,14 +25,14 @@ const Register = () => {
                 </div>
                 <div className="w-full max-w-md p-8 space-y-3 rounded-xl border-2">
                     <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-                    <form className="space-y-6 ng-untouched ng-pristine ng-valid">
+                    <form onSubmit={handleUserSignUP} className="space-y-6 ng-untouched ng-pristine ng-valid">
                         <div className="space-y-1 text-sm">
                             <label htmlFor="name" className="block text-base font-bold">Full Name</label>
                             <input type="text" name="name" placeholder="Your Full Name" className="w-full px-4 py-3 rounded-md focus:outline-primary border" />
                         </div>
                         <div className="space-y-1 text-sm">
                             <label htmlFor="name" className="block text-base font-bold">Upload Image</label>
-                            <input type="text" name="imgURL" placeholder="Upload Your Image" className="w-full px-4 py-3 rounded-md focus:outline-primary border" />
+                            <input type="text" name="photoURL" placeholder="Upload Your Image" className="w-full px-4 py-3 rounded-md focus:outline-primary border" />
                         </div>
                         <div className="space-y-1 text-sm">
                             <label htmlFor="email" className="block text-base font-bold">Email</label>
