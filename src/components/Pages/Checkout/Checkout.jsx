@@ -50,19 +50,16 @@ const Checkout = () => {
         })
             .then(res => res.json())
             .then(data => {
+
                 if (data.acknowledged) {
-                    toast.success("Your Order Is Placed Successfully!", { autoClose: 1000 });
+                    toast.success("Order Placed Successfully!", { autoClose: 1000 });
                     form.reset();
                 }
-
             })
             .catch(error => {
-                toast.error("Something we wrong. Please check console!", { autoClose: 1000 });
+                toast.error("Something went wrong. Please check console!", { autoClose: 1000 });
                 console.log(error.message);
             })
-
-
-
     }
 
 

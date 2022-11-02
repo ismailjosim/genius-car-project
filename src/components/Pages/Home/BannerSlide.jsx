@@ -3,6 +3,7 @@ import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
 
 const BannerSlide = ({ slide }) => {
     const { id, prev, next, image } = slide;
+
     return (
         <div id={`slide${ id }`} className="carousel-item relative w-full max-h-[600px] overflow-hidden">
             <div className="slide-img">
