@@ -3,6 +3,7 @@ import Login from '../components/Auth/Login';
 import Register from '../components/Auth/Register';
 import About from '../components/Pages/About/About';
 import Blog from '../components/Pages/Blog/Blog';
+import Checkout from '../components/Pages/Checkout/Checkout';
 import Contact from '../components/Pages/Contact/Contact';
 import ErrorPage from '../components/Pages/ErrorPage';
 import Home from '../components/Pages/Home/Home';
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />
+            },
+            {
+                path: '/checkout/:id',
+                element: <Checkout />,
+                loader: ({ params }) => fetch(`http://localhost:5000/services/${ params.id }`)
             }
 
         ]

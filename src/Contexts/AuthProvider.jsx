@@ -11,11 +11,11 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
 
-    // User SignUP function
+    // User SignUP functionality
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
-    // Login user function
+    // Login user functionality
     const userLogin = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
