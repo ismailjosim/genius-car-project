@@ -41,6 +41,30 @@ const Orders = () => {
         }
     }
 
+    // handle update status
+    const handleUpdateStatus = id => {
+        fetch(`http://localhost:5000/orders/${ id }`, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'Approved' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    const remaining = orders.filter(odr => odr._id !== id);
+                    const approve = orders.find(odr => odr._id === id);
+                    approve.status = 'Approved';
+                    const newOrders = [approve, ...remaining];
+                    setOrders(newOrders)
+                }
+
+            })
+    }
+
+
     return (
         <div>
             <h3 className='text-3xl my-5 text-center font-bold'>You have Total {orders.length} Orders.</h3>
@@ -55,14 +79,19 @@ const Orders = () => {
                                 </label>
                             </th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
+                            <th>Products Details</th>
+                            <th>Price</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            orders?.map(order => <TableRow key={order._id} order={order} handleDelete={handleDelete}></TableRow>)
+                            orders?.map(order => <TableRow
+                                key={order._id}
+                                order={order}
+                                handleDelete={handleDelete}
+                                handleUpdateStatus={handleUpdateStatus}
+                            ></TableRow>)
                         }
                     </tbody>
                 </table>

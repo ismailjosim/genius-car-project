@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BsPlusLg } from "react-icons/bs";
-const TableRow = ({ order, handleDelete }) => {
+const TableRow = ({ order, handleDelete, handleUpdateStatus }) => {
     const [orderService, setOrderService] = useState({});
-    const { _id, customer, serviceName, price, phoneNumber, service } = order;
+    const { _id, customer, serviceName, price, phoneNumber, service, status } = order;
 
 
     useEffect(() => {
@@ -35,14 +35,14 @@ const TableRow = ({ order, handleDelete }) => {
                     </div>
                 </div>
             </td>
-            <td>
+            <td className='text-xl font-bold text-secondary'>
                 {serviceName}
                 <br />
-                <span className="badge badge-ghost badge-sm">{price}</span>
+                <span className="badge badge-ghost badge-sm">ID: {_id}</span>
             </td>
-            <td>Crimson</td>
+            <td className='text-primary font-semibold'>${price}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                <button onClick={() => handleUpdateStatus(_id)} className="btn btn-sm btn-ghost">{status ? status : "Pending"}</button>
             </th>
         </tr>
     );
