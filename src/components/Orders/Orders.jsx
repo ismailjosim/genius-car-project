@@ -5,18 +5,27 @@ import { toast } from 'react-toastify';
 
 
 const Orders = () => {
-    const { user } = useContext(AuthContext);
+    const { user, userLogout } = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
 
 
     // const url = `http://localhost:5000/orders?email=${ user.email }`;
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${ user?.email }`)
-            .then(res => res.json())
+        fetch(`http://localhost:5000/orders?email=${ user?.email }`, {
+            headers: {
+                authorization: `Bearer ${ localStorage.getItem('genius-token') }`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return userLogout()
+                }
+                return res.json()
+            })
             .then(data => setOrders(data))
 
-    }, [user?.email])
+    }, [user?.email, userLogout])
 
 
     const handleDelete = id => {
@@ -32,7 +41,6 @@ const Orders = () => {
                         const remaining = orders.filter(pd => pd._id !== id);
                         setOrders(remaining);
                     }
-
                 })
                 .catch(error => {
                     toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
