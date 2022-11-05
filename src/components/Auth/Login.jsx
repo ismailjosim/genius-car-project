@@ -29,7 +29,7 @@ const Login = () => {
                     email: user.email
                 }
                 // get JWT Token
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://genius-car-server-khaki-five.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
@@ -59,7 +59,7 @@ const Login = () => {
                     email: user.email
                 }
                 // get JWT Token
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://genius-car-server-khaki-five.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
@@ -89,7 +89,7 @@ const Login = () => {
                     email: user.email
                 }
                 // get JWT Token
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://genius-car-server-khaki-five.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

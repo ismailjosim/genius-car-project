@@ -6,7 +6,7 @@ const TableRow = ({ order, handleDelete, handleUpdateStatus }) => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${ service }`)
+        fetch(`https://genius-car-server-khaki-five.vercel.app/services/${ service }`)
             .then(res => res.json())
             .then(data => setOrderService(data))
     }, [service]);
