@@ -8,9 +8,6 @@ const Orders = () => {
     const { user, userLogout } = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
 
-
-    // const url = `https://genius-car-server-khaki-five.vercel.app/orders?email=${ user.email }`;
-
     useEffect(() => {
         fetch(`https://genius-car-server-khaki-five.vercel.app/orders?email=${ user?.email }`, {
             headers: {
@@ -104,6 +101,7 @@ const Orders = () => {
                     </tbody>
                 </table>
             </div>
+			
         </div>
     );
 };
