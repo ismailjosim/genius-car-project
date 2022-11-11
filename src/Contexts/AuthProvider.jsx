@@ -1,11 +1,13 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, 
-getAuth, onAuthStateChanged, 
-signInWithEmailAndPassword, 
-signInWithPopup, 
-signOut,
- updateProfile } from "firebase/auth";
- 
+import {
+    createUserWithEmailAndPassword,
+    getAuth, onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    updateProfile
+} from "firebase/auth";
+
 import app from '../configs/firebase.config';
 
 export const AuthContext = createContext();
@@ -46,6 +48,10 @@ const AuthProvider = ({ children }) => {
     const gitHubProviderLogin = provider => {
         return signInWithPopup(auth, provider)
     }
+    // Sign in with GitHub Provider
+    const facebookProviderLogin = provider => {
+        return signInWithPopup(auth, provider)
+    }
 
     // Monitor User change
     useEffect(() => {
@@ -68,7 +74,8 @@ const AuthProvider = ({ children }) => {
         userLogout,
         updateUserProfile,
         gitHubProviderLogin,
-        googleProviderLogin
+        googleProviderLogin,
+        facebookProviderLogin
     }
 
     return (
